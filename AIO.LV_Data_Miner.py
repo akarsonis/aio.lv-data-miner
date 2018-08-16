@@ -9,19 +9,6 @@ import re
 import openpyxl
 from openpyxl import Workbook
 
-#Initial Variables
-
-wb = Workbook()
-ws = wb.active
-
-ws.cell(row=1, column=1).value = 'Name'
-ws.cell(row=1, column=2).value = 'Price'
-ws.cell(row=1, column=3).value = 'Product ID'
-ws.cell(row=1, column=4).value = 'Product code'
-ws.cell(row=1, column=5).value = 'EAN code'
-ws.cell(row=1, column=6).value = 'Specs'
-ws.cell(row=1, column=7).value = 'Specs2'
-
 #________________________________________________________________________
 
 #Crawler
@@ -29,11 +16,22 @@ ws.cell(row=1, column=7).value = 'Specs2'
 
 def data_from_aio():
 
-    links = ['https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/operativa-atmina', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/ssd-diski', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/video-kartes', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/procesori', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/pamatplates-mates-plates', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/barosanas-bloki', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/optiskas-ierices', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/tastaturas', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/peles', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/skalruni', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/austinas', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/microfoni', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/web-kameras', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/skanas-kartes', 'https://aio.lv/lv/datoru-sastavdalas-monitori-datoru-periferija-programmatura/ups']
+    links = ['https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/smarzas-vinai', 'https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/smarzas-vinam', 'https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/trimeri', 'https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/mutes-higienai', 'https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/skuvekli', 'https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/matu-veidotaji-un-taisnotaji', 'https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/feni', 'https://aio.lv/lv/preces-skaistumkopsanai-un-veselibai-smarzas-rotaslietas/elektroniskie-termometri', 'https://aio.lv/lv/skaistumkopsanai-un-veselibai-smarzas-un-pro-kosmetika/epilatori', 'https://aio.lv/lv/preces-skaistumkopsanai-un-veselibai-smarzas-rotaslietas/asinsspiediena-meritaji']
     
-    max_pages = [181, 60, 38, 25, 49, 33, 6, 91, 84, 23, 60, 7, 5, 5, 30]
+    max_pages = [7, 4, 6, 2, 6, 11, 8, 1, 3, 2]
     
     for (link, max_page) in zip(links, max_pages):
+        
+        wb = Workbook()
+        ws = wb.active
+        
+        ws.cell(row=1, column=1).value = 'Name'
+        ws.cell(row=1, column=2).value = 'Price'
+        ws.cell(row=1, column=3).value = 'Product ID'
+        ws.cell(row=1, column=4).value = 'Product code'
+        ws.cell(row=1, column=5).value = 'EAN code'
+        ws.cell(row=1, column=6).value = 'Specs'
+        ws.cell(row=1, column=7).value = 'Specs2'        
         
         name_count = 2
         price_count = 2
@@ -226,7 +224,7 @@ def data_from_aio():
                 dictionary_specs = dict(zip(list_name, list_specification))
                 ws.cell(row=dictionary_specs_count, column=7).value = str(dictionary_specs)
                 dictionary_specs_count += 1            
-    #______________________________________________________________________________
+    ##______________________________________________________________________________
             
             start_page += 1
             print(start_page)
